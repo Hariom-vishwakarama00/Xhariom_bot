@@ -3,7 +3,7 @@ import yt_dlp
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 
-TOKEN = os.environ['BOT_TOKEN']
+TOKEN = os.environ['8017171208:AAHOq4sSgubDb1_78HPYyoRX_OuKgH1olpg']
 
 # Start Command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
