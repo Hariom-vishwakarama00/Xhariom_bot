@@ -35,25 +35,16 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.edit_message_text(text="⏳ Processing... Please wait.")
 
     try:
-        if choice == "vid":
-            ydl_opts = {'format': 'best', 'outtmpl': 'downloaded_file.mp4', 'max_filesize': 50*1024*1024}
+                if choice == "vid":
+            ydl_opts = {
+                # Sabse best format dhoondo jo 50MB se chota ho
+                'format': 'best[filesize<500M]/bestvideo[height<=480]+bestaudio/best[height<=480]/worst',
+                'outtmpl': 'downloaded_file.mp4',
+                'merge_output_format': 'mp4',
+            }
             file_name = 'downloaded_file.mp4'
             is_video = True
-        else:
-            ydl_opts = {
-                'format': 'bestaudio/best',
-                'outtmpl': 'downloaded_file.mp3',
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '192',
-                }],
-            }
-            file_name = 'downloaded_file.mp3'
-            is_video = False
-
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
+    
 
         # File bhejna
         if is_video:
